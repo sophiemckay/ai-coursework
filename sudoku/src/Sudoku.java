@@ -6,9 +6,11 @@ public class Sudoku {
 
     private static final int sudokuSize = 9;
 
+
     public static int[][] createSudokuGrid(){
         int[][] grid = new int [9][9]; // initialise 9x9 grid
         File puzzle = new File("puzzle.txt"); // initialise the file 
+
 
         // if the file is found...
         try {
@@ -28,6 +30,7 @@ public class Sudoku {
         // if the file cannot be found
         catch (FileNotFoundException e){
             System.err.println("File not found.");
+            return null;
         }
         return grid;
     }
@@ -57,6 +60,28 @@ public class Sudoku {
         }
     return true;
     }
+    public static boolean sudokuSolver(int[][] grid){
+
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; j++){
+                if (grid[i][j] == 0){
+                    for (int k = 1; k <=9; k++){
+                        if (isValid(grid, i, j, k)){
+                            grid[i][j] = k;
+
+                            if (sudokuSolver(grid)){
+                                return true;
+                            }
+    
+                            grid[i][j] = 0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public static void printGrid(int[][] grid){
         // displays the grid with borders
@@ -74,6 +99,19 @@ public class Sudoku {
         }   
     }
     public static void main(String[] args) throws Exception {
-        
+        int[][] grid = createSudokuGrid();
+        System.out.println("");
+        System.out.println("Original sudoku grid: ");
+        System.out.println("");
+        printGrid(grid);
+
+        if (sudokuSolver(grid)){
+            System.out.println("");
+            System.out.println("Solved sudoku grid: ");
+            System.out.println("");
+            printGrid(grid);
+        } else{
+            System.out.println("No solution found");
+        }
     }
 }
