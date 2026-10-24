@@ -6,7 +6,7 @@ public class Sudoku {
 
     private static final int sudokuSize = 9;
 
-    public static void createSudokuGrid(){
+    public static int[][] createSudokuGrid(){
         int[][] grid = new int [9][9]; // initialise 9x9 grid
         File puzzle = new File("puzzle.txt"); // initialise the file 
 
@@ -29,6 +29,7 @@ public class Sudoku {
         catch (FileNotFoundException e){
             System.err.println("File not found.");
         }
+        return grid;
     }
 
     public static boolean isValid(int[][] grid, int row, int col, int num){
@@ -37,7 +38,8 @@ public class Sudoku {
             if (grid[row][i] == num){
                 return false;
             }
-        // check column
+        }
+        // check col
         for (int j = 0; j < sudokuSize; j++){
             if (grid[j][col] == num){
                 return false;
@@ -53,7 +55,6 @@ public class Sudoku {
                 }
             }
         }
-    }
     return true;
     }
 
