@@ -7,9 +7,9 @@ public class Sudoku {
     private static final int sudokuSize = 9;
     private static int nBacktracks = 0;
 
-    public static int[][] createSudokuGrid(){
+    public static int[][] createSudokuGrid(String filename){
         int[][] grid = new int [9][9]; // initialise 9x9 grid
-        File puzzle = new File("puzzle.txt"); // initialise the file 
+        File puzzle = new File(filename); // initialise the file 
 
 
         // if the file is found...
@@ -100,21 +100,30 @@ public class Sudoku {
         }   
     }
     public static void main(String[] args) throws Exception {
-        int[][] grid = createSudokuGrid();
-        System.out.println("");
-        System.out.println("Original sudoku grid: ");
-        System.out.println("");
-        printGrid(grid);
-
-        if (sudokuSolver(grid)){
-            System.out.println("");
-            System.out.println("Solved sudoku grid: ");
+        String[] puzzles = {"easy.txt", "medium.txt", "hard.txt"};
+        for (String filename : puzzles){
+            int[][] grid = createSudokuGrid(filename);
+            if (grid==null){
+                continue;
+            }
+            nBacktracks=0;
+            System.out.println("Sudoku puzzle level: " + filename);
+            System.out.println("Original sudoku grid: ");
             System.out.println("");
             printGrid(grid);
-            System.out.println("");
-            System.out.println("Number of backtracks: " + nBacktracks);
-        } else{
-            System.out.println("No solution found");
+            if (sudokuSolver(grid)){
+                System.out.println("");
+                System.out.println("Solved sudoku grid: ");
+                System.out.println("");
+                printGrid(grid);
+                System.out.println("");
+                System.out.println("Number of backtracks: " + nBacktracks);
+            } else{
+                System.out.println("No solution found");
         }
+            
+        }
+
+
     }
 }
