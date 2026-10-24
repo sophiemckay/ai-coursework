@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Sudoku {
 
     private static final int sudokuSize = 9;
-
+    private static int nBacktracks = 0;
 
     public static int[][] createSudokuGrid(){
         int[][] grid = new int [9][9]; // initialise 9x9 grid
@@ -73,6 +73,7 @@ public class Sudoku {
                                 return true;
                             }
     
+                            nBacktracks++;
                             grid[i][j] = 0;
                         }
                     }
@@ -110,6 +111,8 @@ public class Sudoku {
             System.out.println("Solved sudoku grid: ");
             System.out.println("");
             printGrid(grid);
+            System.out.println("");
+            System.out.println("Number of backtracks: " + nBacktracks);
         } else{
             System.out.println("No solution found");
         }
