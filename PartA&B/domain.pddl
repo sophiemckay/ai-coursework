@@ -13,6 +13,11 @@
 
     ; )
     (:types
+        rover
+        lander
+        waypoint
+        data
+        samples
 
     )
 
