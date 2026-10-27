@@ -37,6 +37,7 @@
     (:predicates
         (at ?r - rover ?w - waypoint)
         (feature_at ?g - geological_feature ?w - waypoint)
+        (sample_at ?s - sample ?w - waypoint)
         (connected ?w1 - waypoint ?w2 - waypoint)
         (acquired ?r - rover ?d - data)
         (collected_sample ?r - rover ?s - sample)
@@ -47,8 +48,12 @@
         (stored_sample ?l - lander ?s - sample)
         (lander_location ?l - lander ?w - waypoint)
         (is_memory_free ?r - rover)
-        (space_for_sample ?y - sample)
-        (free_lander_storage ?f)
+        (space_for_sample ?r - rover)
+        (free_lander_storage ?l - lander)
+        (at_scan_site ?w - waypoint)
+        (image_data ?d - data)
+        (scan_data ?d - data)
+
     )
 
     ; -------------------------------
@@ -70,7 +75,7 @@
     ; )
 
     (:action navigate_waypoints
-        :parameters (?r - rover ?w1 - waypoint ?w2 - waypoint ?w3 - waypoint ?w4 - waypoint ?w5 - waypoint)
+        :parameters (?r - rover ?w1 - waypoint ?w2 - waypoint )
         :precondition (and 
         (deployed_rover ?r)
         (at ?r ?w1)
@@ -87,9 +92,11 @@
             (deployed_rover ?r)
             (at ?r ?w)
             (is_memory_free ?r)
-            (feature_at ?g ?w))
+            (feature_at ?g ?w)
+            (image_data ?d))
         :effect (and
             (acquired ?r ?d)
+            (not(is_memory_free ?r))
              )
     )
 
@@ -99,9 +106,11 @@
             (deployed_rover ?r)
             (at ?r ?w) 
             (is_memory_free ?r)
-            )
+            (at_scan_site ?w)
+            (scan_data ?d))
         :effect (and 
             (acquired ?r ?d)
+            (not(is_memory_free ?r))
             )
     )
     
@@ -110,23 +119,24 @@
         :parameters (?r - rover ?s - sample ?w - waypoint)
         :precondition (and
             (deployed_rover ?r)
-            (at ?r ?w))
-            (space_for_sample ?y)
+            (at ?r ?w)
+            (sample_at ?s ?w)
+            (space_for_sample ?r))
         :effect (and 
             (collected_sample ?r ?s)
             (carrying ?r ?s)
-            (not(space_for_sample ?y))
+            (not(space_for_sample ?r))
         )
      )
     
     (:action deploy_rover
         :parameters (?l - lander ?w - waypoint ?r - rover)
         :precondition (and
-            (associated ?r ?l) )
-            (lander_location ?l ?w)
+            (associated ?r ?l) 
+            (lander_location ?l ?w) )
         :effect (and
-            (deployed_rover ?r) )
-            (at ?r ?w)
+            (deployed_rover ?r) 
+            (at ?r ?w))
     )
 
     (:action transmit_data
@@ -137,26 +147,26 @@
             (associated ?r ?l)
             )
         :effect (and
-        (transmitted ?l ?r ?d))
+        (transmitted ?l ?r ?d)
+        (not(acquired ?r ?d))
         (is_memory_free ?r)
-       )
+       ))
     
-    (:action stored_sample
+    (:action store_sample
         :parameters (?r - rover ?l - lander ?s - sample ?w - waypoint)
         :precondition (and
         (deployed_rover ?r)
         (carrying ?r ?s)
         (associated ?r ?l) 
         (at ?r ?w)
-        (lander_location ?l ?w))
-        (free_lander_storage ?f)
+        (lander_location ?l ?w)
+        (free_lander_storage ?l))
         :effect (and 
-        (store_sample ?l ?s)
-        (space_for_sample ?y)
-        (not (carrying ?r ?s)))
-        (not(free_lander_storage ?f))
+        (stored_sample ?l ?s)
+        (space_for_sample ?r)
+        (not (carrying ?r ?s))
+        (not(free_lander_storage ?l))
     )
 )
-
-    
+)
 
