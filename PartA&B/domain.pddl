@@ -18,6 +18,9 @@
         waypoint
         data
         sample
+        geological_feature
+        site
+    
     )
 
     ; -------------------------------
@@ -33,11 +36,17 @@
 
     (:predicates
         (at ?r - rover ?w - waypoint)
+        (feature_at ?g - geological_feature ?w - waypoint)
         (connected ?w1 - waypoint ?w2 - waypoint)
-        (acquired ?r - rover ?d data)
-        (transmitted ?r - rover ?d data)
-        (carrying ?r - rover ?s sample)
-        (associated ?r - rover ?l lander)
+        (acquired ?r - rover ?d - data)
+        (collected_sample ?r - rover ?s - sample)
+        (transmitted ?l - lander ?r - rover ?d - data)
+        (carrying ?r - rover ?s - sample)
+        (associated ?r - rover ?l - lander)
+        (at_site ?l - lander ?x - site)
+        (deployed_rover ?r - rover)
+        (store_sample ?l - lander ?s - sample)
+        (lander_location ?l - lander ?w - waypoint)
     )
 
     ; -------------------------------
@@ -61,6 +70,7 @@
     (:action navigate_waypoints
         :parameters (?r - rover ?w1 - waypoint ?w2 - waypoint)
         :precondition (and 
+        (deployed_rover ?r)
         (at ?r ?w1)
         (connected ?w1 ?w2))
         :effect (and
@@ -69,4 +79,76 @@
 
     )
 
+    (:action capture_images
+        :parameters (?r - rover ?d - data ?g - geological_feature ?w - waypoint)
+        :precondition (and 
+            (deployed_rover ?r)
+            (at ?r ?w)
+            (feature_at ?g ?w))
+        :effect (and
+            (acquired ?r ?d)
+             )
+    )
+
+    (:action perform_scan
+        :parameters (?r - rover ?d - data ?w - waypoint)
+        :precondition (and
+            (deployed_rover ?r)
+            (at ?r ?w) 
+            )
+        :effect (and 
+            (acquired ?r ?d)
+            )
+    )
+    
+
+     (:action collect_sample
+        :parameters (?r - rover ?s - sample ?w - waypoint)
+        :precondition (and
+            (deployed_rover ?r)
+            (at ?r ?w) )
+        :effect (and 
+            (collected_sample ?r ?s)
+            (carrying ?r ?s)
+        )
+     )
+    
+    (:action deploy_rover
+        :parameters (?l - lander ?x - site ?r - rover)
+        :precondition (and
+            (at_site ?l ?x)
+            (associated ?r ?l) )
+        :effect (and
+            (deployed_rover ?r) )
+    )
+
+    (:action transmit_data
+        :parameters (?r - rover ?d - data ?l - lander)
+        :precondition (and 
+            (deployed_rover ?r)
+            (acquired ?r ?d)
+            (associated ?r ?l)
+            )
+        :effect (and
+        (transmitted ?l ?r ?d))
+       )
+    
+    (:action store_sample
+        :parameters (?r - rover ?l - lander ?s - sample ?w - waypoint)
+        :precondition (and
+        (deployed_rover ?r)
+        (carrying ?r ?s)
+        (associated ?r ?l) 
+        (at ?r ?w)
+        (lander_location ?l ?w))
+        :effect (and 
+        (store_sample ?l ?s)
+        (not (carrying ?r ?s)))
+    )
+    
+    
+
 )
+
+    
+
