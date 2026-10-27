@@ -17,8 +17,7 @@
         lander
         waypoint
         data
-        samples
-
+        sample
     )
 
     ; -------------------------------
@@ -33,7 +32,12 @@
     ; )
 
     (:predicates
-
+        (at ?r - rover ?w - waypoint)
+        (connected ?from - waypoint ?to - waypoint)
+        (acquired ?r - rover ?d data)
+        (transmitted ?r - rover ?d data)
+        (carrying ?r - rover ?s sample)
+        (associated ?r - rover ?l lander)
     )
 
     ; -------------------------------

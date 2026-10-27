@@ -107,7 +107,11 @@ public class Sudoku {
                 continue;
             }
             nBacktracks=0;
+            System.out.println("");
+            System.out.println("------------------------------------");
             System.out.println("Sudoku puzzle level: " + filename);
+            System.out.println("------------------------------------");
+            System.out.println("");
             System.out.println("Original sudoku grid: ");
             System.out.println("");
             printGrid(grid);
