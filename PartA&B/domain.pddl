@@ -33,7 +33,7 @@
 
     (:predicates
         (at ?r - rover ?w - waypoint)
-        (connected ?from - waypoint ?to - waypoint)
+        (connected ?w1 - waypoint ?w2 - waypoint)
         (acquired ?r - rover ?d data)
         (transmitted ?r - rover ?d data)
         (carrying ?r - rover ?s sample)
@@ -58,10 +58,15 @@
     ;     )
     ; )
 
-    (:action action_name
-        :parameters ()
-        :precondition (and)
-        :effect (and)
+    (:action navigate_waypoints
+        :parameters (?r - rover ?w1 - waypoint ?w2 - waypoint)
+        :precondition (and 
+        (at ?r ?w1)
+        (connected ?w1 ?w2))
+        :effect (and
+            (not(at ?r ?w1))
+            (at ?r ?w2))
+
     )
 
 )
