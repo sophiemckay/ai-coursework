@@ -112,7 +112,7 @@
             (acquired ?r ?d)
             (not(is_memory_free ?r))
             )
-    )
+    );hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
     
 
      (:action collect_sample
