@@ -2,7 +2,9 @@
     (:requirements :strips :typing)
 
     (:types
-
+        lander
+        rover
+        
     )
 
     (:predicates

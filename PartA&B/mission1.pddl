@@ -25,7 +25,7 @@
         (scan_data scan1) ;scan1 is the scan data
 
         (free_lander_storage lander1) ;the lander has free storage available 
-
+    
         (at_scan_site wp3) ;wp3 is the location of the scan site
 
         (feature_at soil1 wp5) ;the geological feature is located at wp5

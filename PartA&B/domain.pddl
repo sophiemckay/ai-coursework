@@ -50,7 +50,7 @@
         (is_memory_free ?r - rover)                   ; whether the rover has space for data
         (space_for_sample ?r - rover)                 ; whether the rover has memory space for a sample
         (free_lander_storage ?l - lander)                ; whether the lander has space for a sample
-        (at_scan_site ?w - waypoint)                           ; whether the given waypoint is the location for scanning
+        (at_scan_site ?d- data ?w - waypoint)                  ; whether the given waypoint is the location for scanning
         (image_data ?d - data)                              ; whether the data is an image
         (scan_data ?d - data)                               ; whether the data is a scan
     )
@@ -105,7 +105,7 @@
             (deployed_rover ?r)
             (at ?r ?w) 
             (is_memory_free ?r)
-            (at_scan_site ?w)
+            (at_scan_site ?d ?w)
             (scan_data ?d))
         :effect (and 
             (acquired ?r ?d)
