@@ -11,7 +11,6 @@
         waypoint
         data
         sample
-        site
     
     )
 
