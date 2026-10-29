@@ -6,7 +6,6 @@
         lander1 - lander ; the lander used in the mission
         wp1 wp2 wp3 wp4 wp5 - waypoint ; these are the 5 waypoints the rover can navigate between 
         image1 scan1 - data ; the image and scan data to be collected
-        soil1 - geological_feature ; a geological feature found 
         sample1 - sample ; a sample collected 
         
     )
