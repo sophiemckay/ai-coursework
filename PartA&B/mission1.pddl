@@ -28,7 +28,8 @@
     
         (at_scan_site wp3) ;wp3 is the location of the scan site
 
-        (feature_at soil1 wp5) ;the geological feature is located at wp5
+        (feature_at wp5) ;the geological feature is located at wp5
+    
 
         (sample_at sample1 wp1) ;the sample is located at wp1
 
