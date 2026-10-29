@@ -11,7 +11,6 @@
         waypoint
         data
         sample
-        geological_feature
         site
     
     )
@@ -21,27 +20,27 @@
     ; -------------------------------
 
     (:predicates    
-        (at ?r - rover ?w - waypoint)                         ; whether the rover is at the waypoint
-        (acquired ?r - rover ?d - data)                       ; whether the rover has acquired the data
-        (collected_sample ?r - rover ?s - sample)             ; whether the rover has collected the sample
-        (carrying ?r - rover ?s - sample)                     ; whether the rover is carrying the sample
-        (associated ?r - rover ?l - lander)                   ; whether the rover and lander are associated 
-        (deployed_rover ?r - rover)                           ; whether the rover has been deployed
-        (is_memory_free ?r - rover)                           ; whether the rover has space for data
-        (space_for_sample ?r - rover)                         ; whether the rover has memory space for a sample
+        (at ?r - rover ?w - waypoint)                          ; whether the rover is at the waypoint
+        (acquired ?r - rover ?d - data)                   ; whether the rover has acquired the data
+        (collected_sample ?r - rover ?s - sample)            ; whether the rover has collected the sample
+        (carrying ?r - rover ?s - sample)                       ; whether the rover is carrying the sample
+        (associated ?r - rover ?l - lander)                 ; whether the rover and lander are associated 
+        (deployed_rover ?r - rover)                      ; whether the rover has been deployed
+        (is_memory_free ?r - rover)                   ; whether the rover has space for data
+        (space_for_sample ?r - rover)                 ; whether the rover has memory space for a sample
         
-        (feature_at ?w - waypoint)                            ; whether the geological feature is at the waypoint
-        (sample_at ?s - sample ?w - waypoint)                 ; whether the sample is at the given waypoint
-        (connected ?w1 - waypoint ?w2 - waypoint)             ; whether the two given waypoints are connected
+        (feature_at ?w - waypoint)                          ; whether the geological feature is at the waypoint
+        (sample_at ?s - sample ?w - waypoint)               ; whether the sample is at the given waypoint
+        (connected ?w1 - waypoint ?w2 - waypoint)           ; whether the two given waypoints are connected
         
-        (transmitted ?l - lander ?r - rover ?d - data)        ; whether the lander has transmitted the data to the rover
-        (stored_sample ?l - lander ?s - sample)               ; whether the lander has a sample stored
-        (lander_location ?l - lander ?w - waypoint)           ; whether the lander is at the waypoint  
-        (free_lander_storage ?l - lander)                     ; whether the lander has space for a sample
+        (transmitted ?l - lander ?r - rover ?d - data)       ; whether the lander has transmitted the data to the rover
+        (stored_sample ?l - lander ?s - sample)              ; whether the lander has a sample stored
+        (lander_location ?l - lander ?w - waypoint)         ; whether the lander is at the waypoint  
+        (free_lander_storage ?l - lander)                ; whether the lander has space for a sample
 
-        (at_scan_site ?w - waypoint)                          ; whether the given waypoint is the location for scanning
-        (image_data ?d - data)                                ; whether the data is an image
-        (scan_data ?d - data)                                 ; whether the data is a scan
+        (at_scan_site ?w - waypoint)                           ; whether the given waypoint is the location for scanning
+        (image_data ?d - data)                              ; whether the data is an image
+        (scan_data ?d - data)                               ; whether the data is a scan
     )
 
     ; -------------------------------
@@ -143,4 +142,3 @@
     )
 )
 )
-
