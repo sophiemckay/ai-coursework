@@ -119,6 +119,7 @@
             (associated_astronaut ?a ?l)
             (area_in ?z ?l)
             (docking_bay ?z))
+            (astronaut_at ?a ?l ?z)
         :effect (and
             (deployed_rover ?r) 
             (at ?r ?w))
@@ -153,6 +154,7 @@
         (associated_astronaut ?a ?l)
         (area_in ?z ?l)
         (docking_bay ?z))
+        (astronaut_at ?a ?l ?z)
         :effect (and 
         (stored_sample ?l ?s)
         (space_for_sample ?r)
