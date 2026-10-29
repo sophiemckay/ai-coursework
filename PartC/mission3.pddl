@@ -23,7 +23,7 @@
 
         ; associate the lander areas for each lander
         (area_in control_room1 lander1)
-        (area_in control_room1 lander2)
+        (area_in control_room2 lander2)
 
         (area_in docking_bay1 lander1)
         (area_in docking_bay2 lander2)
