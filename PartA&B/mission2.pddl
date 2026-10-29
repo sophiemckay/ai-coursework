@@ -11,8 +11,8 @@
 
     (:init
         ; associate the rovers with their landers
-        (associate rover1 lander1)
-        (associate rover2 lander2)
+        (associated rover1 lander1)
+        (associated rover2 lander2)
 
         ; lander is located at waypoint 2 and then rover is already deployed, so rover is set to waypoint 2
         (lander_location lander1 wp2)
@@ -40,12 +40,12 @@
         (free_lander_storage lander2)
 
         ; the waypoints of the scan sites
-        (at_scan_site scan1 wp4)
-        (at_scan_site scan2 wp6)
+        (at_scan_site wp4)
+        (at_scan_site wp6)
 
         ; the waypoints of the geological features for images
-        (feature_at soil1 wp3)
-        (feature_at rock1 wp2)
+        (feature_at wp3)
+        (feature_at wp2)
 
         ; the waypoints of the samples
         (sample_at sample1 wp5)
