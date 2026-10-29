@@ -11,8 +11,6 @@
         waypoint
         data
         sample
-        geological_feature
-        site
         astronaut 
         area
     
