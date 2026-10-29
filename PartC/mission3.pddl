@@ -116,6 +116,8 @@
 
             ; sample data must be stored in lander2 successfully
             (stored_sample lander2 sample2)
+        
         )
     )
-)
+
+) 
