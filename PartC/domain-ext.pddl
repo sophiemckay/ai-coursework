@@ -112,10 +112,13 @@
      )
     
     (:action deploy_rover
-        :parameters (?l - lander ?w - waypoint ?r - rover)
+        :parameters (?l - lander ?w - waypoint ?r - rover ?a - astronaut ?z - area)
         :precondition (and
             (associated ?r ?l) 
             (lander_location ?l ?w) )
+            (associated_astronaut ?a ?l)
+            (area_in ?z ?l)
+            (docking_bay ?z)
         :effect (and
             (deployed_rover ?r) 
             (at ?r ?w))
@@ -127,6 +130,10 @@
             (deployed_rover ?r)
             (acquired ?r ?d)
             (associated ?r ?l)
+            (associated_astronaut ?a ?l)
+            (astronaut at ?a ?l ?z)
+            (area_in ?z ?l)
+            (control_room ?z)
             )
         :effect (and
         (transmitted ?l ?r ?d)
@@ -135,7 +142,7 @@
        ))
     
     (:action store_sample
-        :parameters (?r - rover ?l - lander ?s - sample ?w - waypoint)
+        :parameters (?r - rover ?l - lander ?s - sample ?w - waypoint ?a - astronaut ?z - area)
         :precondition (and
         (deployed_rover ?r)
         (carrying ?r ?s)
@@ -143,6 +150,9 @@
         (at ?r ?w)
         (lander_location ?l ?w)
         (free_lander_storage ?l))
+        (associated_astronaut ?a ?l ?z)
+        (area_in ?z ?l)
+        (docking_bay ?z)
         :effect (and 
         (stored_sample ?l ?s)
         (space_for_sample ?r)
