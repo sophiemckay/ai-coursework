@@ -28,6 +28,12 @@
         (area_in docking_bay1 lander1)
         (area_in docking_bay2 lander2)
 
+        ; which room exists in each lander and what type of room each room is
+        (control_room control_room1)
+        (docking_bay docking_bay1)
+        (control_room control_room2)
+        (docking_bay docking_bay2)
+
         ; connect areas in lander
         (connected_area control_room1 docking_bay1)
         (connected_area docking_bay1 control_room1)
