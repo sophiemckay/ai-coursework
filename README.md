@@ -1,2 +1,2 @@
 # ai-coursework
-#hey gabi gabiiiiiii
+#To run Sudoku, run the main Sudoku.Java with the three txt files. 
