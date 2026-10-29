@@ -5,13 +5,6 @@
     ; Types
     ; -------------------------------
 
-    ; EXAMPLE
-
-    ; (:types
-    ;     parent_type
-    ;     child_type - parent_type
-
-    ; )
     (:types
         rover
         lander
@@ -27,51 +20,33 @@
     ; Predicates
     ; -------------------------------
 
-    ; EXAMPLE
-
-    ; (:predicates
-    ;     (no_arity_predicate)
-    ;     (one_arity_predicate ?p - parameter_type)
-    ; )
-
     (:predicates    
-        (at ?r - rover ?w - waypoint)                          ; whether the rover is at the waypoint
-        (feature_at ?g - geological_feature ?w - waypoint)  ; whether the geological feature is at the waypoint
-        (sample_at ?s - sample ?w - waypoint)               ; whether the sample is at the given waypoint
-        (connected ?w1 - waypoint ?w2 - waypoint)           ; whether the two given waypoints are connected
-        (acquired ?r - rover ?d - data)               ; whether the rover has acquired the data
-        (collected_sample ?r - rover ?s - sample)            ; whether the rover has collected the sample
-        (transmitted ?l - lander ?r - rover ?d - data)       ; whether the lander has transmitted the data to the rover
-        (carrying ?r - rover ?s - sample)             ; whether the rover is carrying the sample
-        (associated ?r - rover ?l - lander)                 ; whether the rover and lander are associated 
-        (deployed_rover ?r - rover)                      ; whether the rover has been deployed
-        (stored_sample ?l - lander ?s - sample)              ; whether the lander has a sample stored
-        (lander_location ?l - lander ?w - waypoint)         ; whether the lander is at the waypoint
-        (is_memory_free ?r - rover)                   ; whether the rover has space for data
-        (space_for_sample ?r - rover)                 ; whether the rover has memory space for a sample
-        (free_lander_storage ?l - lander)                ; whether the lander has space for a sample
-        (at_scan_site ?d- data ?w - waypoint)                  ; whether the given waypoint is the location for scanning
-        (image_data ?d - data)                              ; whether the data is an image
-        (scan_data ?d - data)                               ; whether the data is a scan
+        (at ?r - rover ?w - waypoint)                         ; whether the rover is at the waypoint
+        (acquired ?r - rover ?d - data)                       ; whether the rover has acquired the data
+        (collected_sample ?r - rover ?s - sample)             ; whether the rover has collected the sample
+        (carrying ?r - rover ?s - sample)                     ; whether the rover is carrying the sample
+        (associated ?r - rover ?l - lander)                   ; whether the rover and lander are associated 
+        (deployed_rover ?r - rover)                           ; whether the rover has been deployed
+        (is_memory_free ?r - rover)                           ; whether the rover has space for data
+        (space_for_sample ?r - rover)                         ; whether the rover has memory space for a sample
+        
+        (feature_at ?w - waypoint)                            ; whether the geological feature is at the waypoint
+        (sample_at ?s - sample ?w - waypoint)                 ; whether the sample is at the given waypoint
+        (connected ?w1 - waypoint ?w2 - waypoint)             ; whether the two given waypoints are connected
+        
+        (transmitted ?l - lander ?r - rover ?d - data)        ; whether the lander has transmitted the data to the rover
+        (stored_sample ?l - lander ?s - sample)               ; whether the lander has a sample stored
+        (lander_location ?l - lander ?w - waypoint)           ; whether the lander is at the waypoint  
+        (free_lander_storage ?l - lander)                     ; whether the lander has space for a sample
+
+        (at_scan_site ?w - waypoint)                          ; whether the given waypoint is the location for scanning
+        (image_data ?d - data)                                ; whether the data is an image
+        (scan_data ?d - data)                                 ; whether the data is a scan
     )
 
     ; -------------------------------
     ; Actions
     ; -------------------------------
-
-    ; EXAMPLE
-
-    ; (:action action-template
-    ;     :parameters (?p - parameter_type)
-    ;     :precondition (and
-    ;         (one_arity_predicate ?p)
-    ;     )
-    ;     :effect 
-    ;     (and 
-    ;         (no_arity_predicate)
-    ;         (not (one_arity_predicate ?p))
-    ;     )
-    ; )
 
     (:action navigate_waypoints
         :parameters (?r - rover ?w1 - waypoint ?w2 - waypoint )
@@ -86,12 +61,12 @@
     )
 
     (:action capture_images
-        :parameters (?r - rover ?d - data ?g - geological_feature ?w - waypoint)
+        :parameters (?r - rover ?d - data ?w - waypoint)
         :precondition (and 
             (deployed_rover ?r)
             (at ?r ?w)
             (is_memory_free ?r)
-            (feature_at ?g ?w)
+            (feature_at ?w)
             (image_data ?d))
         :effect (and
             (acquired ?r ?d)
@@ -105,13 +80,13 @@
             (deployed_rover ?r)
             (at ?r ?w) 
             (is_memory_free ?r)
-            (at_scan_site ?d ?w)
+            (at_scan_site ?w)
             (scan_data ?d))
         :effect (and 
             (acquired ?r ?d)
             (not(is_memory_free ?r))
             )
-    );hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+    )
     
 
      (:action collect_sample
