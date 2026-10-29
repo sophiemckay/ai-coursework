@@ -115,23 +115,23 @@
         :parameters (?l - lander ?w - waypoint ?r - rover ?a - astronaut ?z - area)
         :precondition (and
             (associated ?r ?l) 
-            (lander_location ?l ?w) )
+            (lander_location ?l ?w) 
             (associated_astronaut ?a ?l)
             (area_in ?z ?l)
-            (docking_bay ?z)
+            (docking_bay ?z))
         :effect (and
             (deployed_rover ?r) 
             (at ?r ?w))
     )
 
     (:action transmit_data
-        :parameters (?r - rover ?d - data ?l - lander)
+        :parameters (?r - rover ?d - data ?l - lander ?a - astronaut ?z - area)
         :precondition (and 
             (deployed_rover ?r)
             (acquired ?r ?d)
             (associated ?r ?l)
             (associated_astronaut ?a ?l)
-            (astronaut at ?a ?l ?z)
+            (astronaut_at ?a ?l ?z)
             (area_in ?z ?l)
             (control_room ?z)
             )
@@ -149,10 +149,10 @@
         (associated ?r ?l) 
         (at ?r ?w)
         (lander_location ?l ?w)
-        (free_lander_storage ?l))
-        (associated_astronaut ?a ?l ?z)
+        (free_lander_storage ?l)
+        (associated_astronaut ?a ?l)
         (area_in ?z ?l)
-        (docking_bay ?z)
+        (docking_bay ?z))
         :effect (and 
         (stored_sample ?l ?s)
         (space_for_sample ?r)
